@@ -4,18 +4,20 @@ const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
+const util = require("util");
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
-const { fetchAsyncQuestionPropertyQuestionProperty } = require("inquirer/lib/utils/utils");
-const { ifStatement } = require("@babel/types");
+const writeFileAsync = util.promisify(fs.writeFile);
+//const { fetchAsyncQuestionPropertyQuestionProperty } = require("inquirer/lib/utils/utils");
+//const { ifStatement } = require("@babel/types");
 
-const createdEmployees = [];
-let createdManagers = [];
-let createdInterns = [];
-let createdEngineers = [];
+const employees = [];
+//let createdManagers = [];
+//let createdInterns = [];
+//let createdEngineers = [];
 //function to generate employee
 //ask what employee wants to enter
 //function for additonal qs(manager, intern, engineer)
@@ -27,6 +29,10 @@ let createdEngineers = [];
 //building html rendering function file build words
 //inquirer.prompt().then;
 
+function generateMyTeam() {
+    const teamHTML = render(employees);
+    writeFileAsync(outputPath, teamHTML);
+}
 //RUN APPLICATION
 
 function run() {
@@ -76,12 +82,19 @@ function nextEmployee() {
                 createEmployee();
             }
             if (answers.next == 'NO') {
-                console.log('FIN');
-                console.log(createdManagers);
-                console.log(createdEngineers);
-                console.log(createdInterns);
+                console.log(employees);
+                //render
+                //console.log(createdEngineers);
+                //console.log(createdInterns);
             }
+
         })
+        .then(function() {
+            generateMyTeam();
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
 }
 
 //CREATE SPECIFIC EMPLOYEE TYPE
@@ -110,8 +123,8 @@ function createEngineer() {
             }
         ])
         .then(answers => {
-            let newEngineer = answers;
-            createdEngineers.push(newEngineer);
+            const newEngineer = new Engineer(answers.name, answers.id, answers.email, answers.username);
+            employees.push(newEngineer);
             nextEmployee();
         });
 };
@@ -140,8 +153,8 @@ function createIntern() {
             }
         ])
         .then(answers => {
-            let newIntern = answers;
-            createdInterns.push(newIntern);
+            const newIntern = new Intern(answers.name, answers.id, answers.email, answers.school);
+            employees.push(newIntern);
             nextEmployee();
         });
 
@@ -171,11 +184,13 @@ function createManager() {
             }
         ])
         .then(answers => {
-            let newManager = answers;
-            createdManagers.push(newManager);
+            const newManager = new Manager(answers.name, answers.id, answers.email, answers.officeNumber);
+            employees.push(newManager);
             nextEmployee();
         });
 };
+
+//module.exports = employees
 
 
 

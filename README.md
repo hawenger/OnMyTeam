@@ -2,7 +2,7 @@
 
 #### Javascript & Node command line application to build HTML team rosters for easier easier employee managament!
 
-[Application Image](https://github.com/hawenger/quickNote/issues/1#issue-702998402)
+[Application Image](https://github.com/hawenger/OnMyTeam/issues/1)
 
 ### Table of Contents
 * [Installation](##Installation)

@@ -20,7 +20,6 @@ const employees = [];
 function generateMyTeam() {
     const teamHTML = render(employees);
     writeFileAsync(outputPath, teamHTML);
-    console.log("See your team output/team.html!")
 }
 //FUNCTION TO BEGIN APPLICATION
 

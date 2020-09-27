@@ -9,6 +9,61 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
+const { fetchAsyncQuestionPropertyQuestionProperty } = require("inquirer/lib/utils/utils");
+const { ifStatement } = require("@babel/types");
+
+const createdEmployees = [];
+//function to generate employee
+//ask what employee wants to enter
+//function for additonal qs(manager, intern, engineer)
+
+
+//function to generate manager
+//ask what type of employee want to create
+//function to handle intern and engineer
+//building html rendering function file build words
+//inquirer.prompt().then;
+function run() {
+    createEmployee();
+};
+
+function createEmployee() {
+    inquirer
+        .prompt([{
+            type: 'list',
+            name: 'type',
+            message: 'Select employee role:',
+            choices: [
+                { name: 'Intern' },
+                { name: 'Engineer' },
+                { name: 'Manager' }
+            ]
+        }]).then(answers => {
+            if (answers.type == 'Intern') {
+                createIntern();
+            }
+            if (answers.type == 'Engineer') {
+                createEngineer();
+            }
+            if (answers.type == 'Manager') {
+                createManager();
+            }
+        })
+};
+
+
+function createEngineer() {
+    console.log("engineer");
+};
+
+function createIntern() {
+    console.log("intern");
+};
+
+function createManager() {
+    console.log("manager");
+};
+
 
 
 // Write code to use inquirer to gather information about the development team members,
@@ -33,3 +88,5 @@ const render = require("./lib/htmlRenderer");
 // for further information. Be sure to test out each class and verify it generates an
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
+
+run();

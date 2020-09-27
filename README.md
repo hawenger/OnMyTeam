@@ -1,2 +1,38 @@
 # OnMyTeam
-Build an HTML team roster with this command line application which allows a user to name a team manager about team members.s well as input information about 
+
+#### Javascript & Node command line application to build HTML team rosters for easier easier employee managament!
+
+[Application Image](https://github.com/hawenger/quickNote/issues/1#issue-702998402)
+
+### Table of Contents
+* [Installation](##Installation)
+* [Usage](##Usage)
+* [License](##License)
+* [Contributing](##Contributing)
+* [Questions](##Questions)
+
+## Installation
+* Download package 
+* Open folder in VS Code 
+* ctrl~ (open your terminal) 
+* npm install (in terminal)
+
+## Usage
+After npm install: 
+* node app.js (in terminal)
+* follow prompts
+* team roster will be generated under the outputs folder
+
+## License
+MIT License
+Copyright (c) 2020 Hannah Wenger
+
+## Contributing
+Hannah Wenger
+        
+## Questions
+#### Github Profile
+[hawenger](https://github.com/hawenger)
+#### Please submit questions to:
+<hamecow@gmail.com>
+

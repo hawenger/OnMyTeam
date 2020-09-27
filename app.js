@@ -13,6 +13,9 @@ const { fetchAsyncQuestionPropertyQuestionProperty } = require("inquirer/lib/uti
 const { ifStatement } = require("@babel/types");
 
 const createdEmployees = [];
+let createdManagers = [];
+let createdInterns = [];
+let createdEngineers = [];
 //function to generate employee
 //ask what employee wants to enter
 //function for additonal qs(manager, intern, engineer)
@@ -23,9 +26,14 @@ const createdEmployees = [];
 //function to handle intern and engineer
 //building html rendering function file build words
 //inquirer.prompt().then;
+
+//RUN APPLICATION
+
 function run() {
     createEmployee();
 };
+
+//TYPE OF EMPLOYEE TO CREATE PROMPT
 
 function createEmployee() {
     inquirer
@@ -51,17 +59,122 @@ function createEmployee() {
         })
 };
 
+//ADD ANOTHER EMPLOYEE PROMPT
+function nextEmployee() {
+    inquirer
+        .prompt([{
+            type: 'list',
+            name: 'next',
+            message: 'Add another employee?',
+            choices: [
+                { name: 'YES' },
+                { name: 'NO' },
+            ]
+        }])
+        .then(answers => {
+            if (answers.next == 'YES') {
+                createEmployee();
+            }
+            if (answers.next == 'NO') {
+                console.log('FIN');
+                console.log(createdManagers);
+                console.log(createdEngineers);
+                console.log(createdInterns);
+            }
+        })
+}
+
+//CREATE SPECIFIC EMPLOYEE TYPE
 
 function createEngineer() {
-    console.log("engineer");
+    inquirer
+        .prompt([{
+                type: 'input',
+                name: 'name',
+                message: 'EMPLOYEE NAME'
+            },
+            {
+                type: 'input',
+                name: 'id',
+                message: 'EMPLOYEE ID'
+            },
+            {
+                type: 'input',
+                name: 'email',
+                message: 'EMPLOYEE EMAIL'
+            },
+            {
+                type: 'input',
+                name: 'username',
+                message: 'GITHUB USERNAME'
+            }
+        ])
+        .then(answers => {
+            let newEngineer = answers;
+            createdEngineers.push(newEngineer);
+            nextEmployee();
+        });
 };
 
 function createIntern() {
-    console.log("intern");
+    inquirer
+        .prompt([{
+                type: 'input',
+                name: 'name',
+                message: 'EMPLOYEE NAME'
+            },
+            {
+                type: 'input',
+                name: 'id',
+                message: 'EMPLOYEE ID'
+            },
+            {
+                type: 'input',
+                name: 'email',
+                message: 'EMPLOYEE EMAIL'
+            },
+            {
+                type: 'input',
+                name: 'school',
+                message: 'SCHOOL NAME'
+            }
+        ])
+        .then(answers => {
+            let newIntern = answers;
+            createdInterns.push(newIntern);
+            nextEmployee();
+        });
+
 };
 
 function createManager() {
-    console.log("manager");
+    inquirer
+        .prompt([{
+                type: 'input',
+                name: 'name',
+                message: 'EMPLOYEE NAME'
+            },
+            {
+                type: 'input',
+                name: 'id',
+                message: 'EMPLOYEE ID'
+            },
+            {
+                type: 'input',
+                name: 'email',
+                message: 'EMPLOYEE EMAIL'
+            },
+            {
+                type: 'input',
+                name: 'officeNumber',
+                message: 'OFFICE NUMBER'
+            }
+        ])
+        .then(answers => {
+            let newManager = answers;
+            createdManagers.push(newManager);
+            nextEmployee();
+        });
 };
 
 
